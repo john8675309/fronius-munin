@@ -1,5 +1,14 @@
 #!/usr/bin/php
 <?php
+#Fronius API JSON By John Hass
+#john8675309 at gmail.com
+#Licensed under GPLV2
+$host="";
+#-------------------------End Self Config-------------------------------
+if ($host == "") {
+	echo "edit $argv[0] and set the address of the inverter\n";
+	exit;
+}
 if ($argc == 2) {
 	if ($argv[1] == "config") {
 		echo "graph_title Total Kw\n";
@@ -12,8 +21,6 @@ if ($argc == 2) {
 }
 
 
-$host="192.168.250.155";
-#-------------------------End Self Config-------------------------------
 //curl the inverter data, I only care about the total
 $ch = curl_init(); 
 curl_setopt($ch, CURLOPT_URL, "http://$host/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System&DataCollection=CommonInverterData"); 
